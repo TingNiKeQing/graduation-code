@@ -9,3 +9,11 @@ The project integrates FRBNet as a plug-in front-end ahead of a frozen DepthAnyt
 `fittrain.py`:  Stage 3 fine-tuning: loads the Stage 2 checkpoint and continues training on real RobotCarNight image/depth pairs
 `run_depth_only.py` : Baseline-only inference: runs DepthAnythingV2 directly on raw low-light images
 `run_pipeline_frbnet_to_depth.py`: Standalone FRBNet → DepthAnythingV2 pipeline runner used to generate illustrative enhanced images and depth maps.
+###Before You Run `run_pipeline_frbnet_to_depth.py`
+Unlike the other scripts, this one does not take model paths as command-line arguments. Several paths are hardcoded near the top of the file for the author's own machine, for example:
+```python
+FRBNET\_CONFIG = r"D:\\frbnet\\mmdetection\\configs\\yolov3\_frbnet\_exdark.py"
+FRBNET\_CHECKPOINT = r"D:\\frbnet\\checkpoint\\frbnet\_stage2\_epoch9.pth"
+DEPTH\_CHECKPOINT = r"D:\\frbnet\\Depth-Anything-V2\\checkpoints\\depth\_anything\_v2\_vitb.pth"
+```
+You must edit these lines directly to point at your own local paths before running this script. Note also that the FRBNet checkpoint hardcoded above (`frbnet\_stage2\_epoch9.pth`) is an intermediate epoch used for illustrative/exploratory output only, and is not the same checkpoint used for the dissertation's quantitative Chapter 4 results

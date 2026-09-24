@@ -3,3 +3,9 @@ Graduation_code
 Evaluating FRBNet as a Low-Light Enhancement Front-End for DepthAnythingV2
 This repository contains the code developed for an MSc dissertation project evaluating whether FRBNet, a frequency-domain low-light feature enhancement network, improves monocular depth estimation with DepthAnythingV2 under low-light and night-time conditions.
 The project integrates FRBNet as a plug-in front-end ahead of a frozen DepthAnythingV2 backbone (`low-light RGB → FRBNet → enhanced RGB → DepthAnythingV2 → depth map`), and evaluates it across a baseline-plus-three-stage experimental ladder (no FRBNet → inference-only FRBNet → FRBNet trained on synthetic low light → FRBNet fine-tuned on real night-time driving data), on the NYU Depth V2 and Oxford RobotCar (RobotCarNight) datasets.
+## Contents
+`darkchange.py`: physically-motivated Dark-ISP pipeline for synthesising low-light images from well-lit photographs
+`train.py`: Stage 2 training: FRBNet initialised from ExDark detection-pretrained weights, trained on NYU Depth V2 with on-the-fly Dark-ISP synthetic low light, supervised by real NYU depth
+`fittrain.py`:  Stage 3 fine-tuning: loads the Stage 2 checkpoint and continues training on real RobotCarNight image/depth pairs
+`run_depth_only.py` : Baseline-only inference: runs DepthAnythingV2 directly on raw low-light images
+`run_pipeline_frbnet_to_depth.py`: Standalone FRBNet → DepthAnythingV2 pipeline runner used to generate illustrative enhanced images and depth maps.
